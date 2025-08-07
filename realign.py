@@ -3,6 +3,7 @@ import numpy as np
 from scipy.ndimage import gaussian_filter
 from scipy.interpolate import NdBSpline
 import matplotlib.pyplot as plt
+from tqdm import tqdm
 
 def chain_and(*args):
     A = np.ones(args[0].shape, dtype=bool)
@@ -193,7 +194,7 @@ def realign(P,
         grad3 = dG3.copy()
 
 
-    for i in range(1, len(P)):
+    for i in tqdm(range(1, len(P))):
         V = afn(P[i], gaussian_filter, s, axes=(0, 1, 2))
         d  = V.shape[:3]
         ss = np.inf
